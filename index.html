@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Todos</title>
+
+  <!-- css:vendor -->
+  <link rel="stylesheet" href="https://sdk.ttcdn.co/tt-uikit-0.11.0.min.css">
+</head>
+<body>
+  <div class="app-container container-fluid">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+        <header>
+          <h1>Todos</h1>
+        </header>
+
+        <form class="form-inline row">
+          <div class="col-xs-8 col-md-9">
+              <input type="text" placeholder="What needs to be done?" class="form-control">
+          </div>
+          <div class="col-xs-4 col-md-3">
+            <button type="button" class="btn btn-default">Add Todo</button>
+          </div>
+        </form>
+
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <input type="checkbox" id="checkbox-1">
+                  <label for="checkbox-1">Discuss report with John</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <input type="checkbox" id="checkbox-2">
+                  <label for="checkbox-2">Discuss report with John</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <input type="checkbox" id="checkbox-3">
+                  <label for="checkbox-3">Discuss report with John</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <input type="checkbox" id="checkbox-4">
+                  <label for="checkbox-4">Discuss report with John</label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+        <hr/>
+        <small class="pull-left">
+          2 items left
+        </small>
+        <small class="pull-right">
+          <a href="#">Mark all as complete</a>
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <!-- js:vendor -->
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="https://sdk.ttcdn.co/tt-uikit-0.11.0.min.js"></script>
+</body>
+</html>
