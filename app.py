@@ -2,14 +2,14 @@
 
 from flask import Flask, render_template, Response, json, jsonify, request
 
-from lib.mock import MockTodoListRepo
+from lib.mock import TodoListRepo
 
 app = Flask(__name__)
 # TODO: How to enable this only locally?
 # http://flask.pocoo.org/docs/config/
 app.debug = True
 
-todo_list_repo = MockTodoListRepo()
+todo_list_repo = TodoListRepo()
 
 def parse_todo_item_json_body():
     json = request.get_json()
@@ -18,7 +18,6 @@ def parse_todo_item_json_body():
         'title': json['title'],
         'done': json['done']
     }
-    print item
     return item
 
 @app.route('/api/lists/<list_id>/items/', methods=['GET', 'POST'])

@@ -2,7 +2,7 @@
 
 from uuid import uuid4
 
-class MockTodoListRepo(object):
+class TodoListRepo(object):
     def __init__(self):
         self.lists = {}
 
@@ -21,7 +21,6 @@ class MockTodoListRepo(object):
     def update_list_item(self, list_id, updated_item):
         if list_id not in self.lists:
             raise KeyError()
-        print self.lists[list_id]
         matched_items = filter(lambda t: t['id'] == updated_item['id'], self.lists[list_id])
         if len(matched_items) != 1:
             raise KeyError('Could not find item {} in list {}'.format(updated_item['id'], list_id))
