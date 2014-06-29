@@ -16,7 +16,7 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
 
       this.input = this.$("#add-new-todo input[name=title]");
 
-      this.header = this.$('header');
+      this.header = this.$('#todo-header');
       this.footer = this.$('#todo-footer');
 
       this.listenTo(this.collection, 'add', this.addOne);
