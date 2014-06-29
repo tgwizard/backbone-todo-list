@@ -37,3 +37,4 @@ foreman start
 ## Known caveats
 
  - Drag and drop to reorder list items doesn't work on touch devices.
+ - Reorder doesn't work correctly on Heroku since none of the available MongoDB providers ([MongoHQ](https://www.mongohq.com/), [MongoLab](https://mongolab.com) or [MongoSoup](https://www.mongosoup.de/)) support MongoDB version greater than 2.4.X, and this app makes use the `$position` operator introduced in 2.6: http://docs.mongodb.org/manual/reference/operator/update/position/
