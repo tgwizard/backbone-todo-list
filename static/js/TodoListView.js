@@ -3,6 +3,7 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
     el: _.template($('#todo-list-template').html()),
 
     statusTemplate: _.template($('#status-template').html()),
+    headerTemplate: _.template($('#todo-list-header-template').html()),
 
     events: {
       'submit #add-new-todo': 'createNewTodo',
@@ -16,6 +17,7 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
       this.input = this.$("#add-new-todo input[name=title]");
       this.input.focus(); // Would like to use autofocus, but it seems to only work on page reload
 
+      this.header = this.$('header');
       this.footer = this.$('#todo-footer');
 
       this.listenTo(this.collection, 'add', this.addOne);
@@ -33,6 +35,7 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
     },
 
     render: function() {
+      this.header.html(this.headerTemplate({ id: this.collection.id }));
       var remaining = this.collection.remaining().length;
       this.footer.html(this.statusTemplate({remaining: remaining}));
 
