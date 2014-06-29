@@ -1,55 +1,63 @@
 define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], function($, Backbone, _, TodoList, TodoItemView) {
-    var todos = new TodoList();
+  var TodoListView = Backbone.View.extend({
+    el: _.template($('#todo-list-template').html()),
 
-    var TodoListView = Backbone.View.extend({
-        el: $("#todo-app"),
+    statusTemplate: _.template($('#status-template').html()),
 
-        statusTemplate: _.template($('#status-template').html()),
+    events: {
+      'submit #add-new-todo': 'createNewTodo',
+      'click .mark-all-as-done': 'markAllAsDone',
+    },
 
-        events: {
-          'submit #add-new-todo': 'createNewTodo',
-          'click .mark-all-as-done': 'markAllAsDone',
-        },
+    initialize: function(options) {
+      $("#main").html(this.el);
+      this.subviews = [];
 
-        initialize: function() {
-          this.input = this.$("#add-new-todo input[name=title]");
-          this.footer = this.$('#todo-footer');
+      this.input = this.$("#add-new-todo input[name=title]");
+      this.footer = this.$('#todo-footer');
 
-          this.listenTo(todos, 'add', this.addOne);
-          this.listenTo(todos, 'reset', this.addAll);
-          this.listenTo(todos, 'all', this.render);
+      this.listenTo(this.collection, 'add', this.addOne);
+      this.listenTo(this.collection, 'reset', this.addAll);
+      this.listenTo(this.collection, 'all', this.render);
 
-          todos.fetch();
-          return this;
-        },
+      return this;
+    },
 
-        render: function() {
-          var remaining = todos.remaining().length;
-          this.footer.html(this.statusTemplate({remaining: remaining}));
-          return this;
-        },
+    destroy: function() {
+      _.each(this.subviews, function(view) {
+      view.destroy();
+      });
+      this.remove();
+    },
 
-        addOne: function(todo) {
-          var view = new TodoItemView({ model: todo });
-          this.$el.find("#todo-list-body").append(view.render().el);
-        },
+    render: function() {
+      var remaining = this.collection.remaining().length;
+      this.footer.html(this.statusTemplate({remaining: remaining}));
+      return this;
+    },
 
-        addAll: function() {
-          todos.each(this.addOne, this);
-        },
+    addOne: function(todo) {
+      var view = new TodoItemView({ model: todo });
+      this.subviews.push(view);
+      this.$el.find("#todo-list-body").append(view.render().el);
+    },
 
-        createNewTodo: function(e) {
-          e.preventDefault();
-          var title = this.input.val();
-          todos.create({ title: title }, { wait: true });
-          this.input.val('');
-        },
+    addAll: function() {
+      this.collection.each(this.addOne, this);
+    },
 
-        markAllAsDone: function(e) {
-          e.preventDefault();
-          todos.markAllAsDone();
-        }
-    });
+    createNewTodo: function(e) {
+      e.preventDefault();
+      var title = this.input.val();
+      this.collection.create({ title: title }, { wait: true });
+      this.input.val('');
+    },
 
-    return TodoListView;
+    markAllAsDone: function(e) {
+      e.preventDefault();
+      this.collection.markAllAsDone();
+    },
+  });
+
+  return TodoListView;
 });

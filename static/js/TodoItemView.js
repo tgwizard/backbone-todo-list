@@ -12,6 +12,10 @@ define(['backbone', 'underscore'], function(Backbone, _) {
         this.listenTo(this.model, 'all', this.render);
       },
 
+      destroy: function() {
+        this.remove();
+      },
+
       render: function() {
         this.$el.html(this.template(this.model.toJSON()));
         this.$el.find('input[type=checkbox]').check();

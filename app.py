@@ -11,14 +11,6 @@ app.debug = True
 
 todo_list_repo = MockTodoListRepo()
 
-@app.route('/')
-def hello():
-    return 'Hello World!'
-
-@app.route('/list/')
-def list():
-    return render_template('list.html')
-
 mock_list_id = 'a1'
 
 def parse_todo_item_json_body():
@@ -46,6 +38,10 @@ def todo(id):
         item = todo_list_repo.update_list_item(mock_list_id, parse_todo_item_json_body())
         return jsonify(item), 200
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def all(path):
+    return render_template('list.html')
 
 if __name__ == "__main__":
     app.run()
