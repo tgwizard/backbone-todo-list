@@ -13,6 +13,7 @@ requirejs.config({
   }
 });
 
-require(['jquery', 'ttuikit', 'Router'], function($, ttuikit, router) {
+require(['jquery', 'ttuikit', 'Router'], function($, ttuikit, Router) {
+  var router = new Router();
   Backbone.history.start({ pushState: true });
 });

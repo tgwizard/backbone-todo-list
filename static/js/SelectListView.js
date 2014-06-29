@@ -1,4 +1,4 @@
-define(['backbone', 'underscore', 'router'], function(Backbone, _, router) {
+define(['backbone', 'underscore'], function(Backbone, _) {
   return Backbone.View.extend({
     el: _.template($('#select-list-template').html()),
 
@@ -22,7 +22,7 @@ define(['backbone', 'underscore', 'router'], function(Backbone, _, router) {
       var listId = this.input.val();
       listId = listId.replace(/^\s+|\s+$/g, '');
       this.input.val('');
-      router.navigate('lists/' + listId, { trigger: true });
+      Backbone.history.navigate('lists/' + listId, { trigger: true });
     }
   });
 });

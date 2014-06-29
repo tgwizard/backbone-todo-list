@@ -1,7 +1,5 @@
-define(['backbone', 'SelectListView', 'TodoList', 'TodoListView', 'NotFoundView'],
-  function(Backbone, SelectListView, TodoList, TodoListView, NotFoundView) {
-  var Router = Backbone.Router.extend({
-
+define(['backbone', 'SelectListView', 'TodoList', 'TodoListView', 'NotFoundView'], function(Backbone, SelectListView, TodoList, TodoListView, NotFoundView) {
+  return Backbone.Router.extend({
     routes: {
       '': 'index',
       'lists/:id': 'list',
@@ -41,6 +39,4 @@ define(['backbone', 'SelectListView', 'TodoList', 'TodoListView', 'NotFoundView'
       this.view = view;
     },
   });
-
-  return new Router();
 })

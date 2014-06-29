@@ -1,4 +1,4 @@
-define(['backbone', 'underscore', 'router'], function(Backbone, _, router) {
+define(['backbone', 'underscore'], function(Backbone, _) {
   return Backbone.View.extend({
     el: _.template($('#not-found-template').html()),
 
