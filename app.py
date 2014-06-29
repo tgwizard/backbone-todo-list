@@ -2,14 +2,23 @@
 
 from flask import Flask, render_template, Response, json, jsonify, request
 
-from lib.mock import TodoListRepo
-
 app = Flask(__name__)
 # TODO: How to enable this only locally?
 # http://flask.pocoo.org/docs/config/
 app.debug = True
 
-todo_list_repo = TodoListRepo()
+enable_mongo = True
+
+if enable_mongo:
+    import os
+    from pymongo import MongoClient
+    from lib.real import TodoListRepo
+    client = MongoClient(os.environ.get('MONGOHQ_URL', 'mongodb://localhost:27017/'))
+    db = client.todos
+    todo_list_repo = TodoListRepo(db)
+else:
+    from lib.mock import TodoListRepo
+    todo_list_repo = TodoListRepo()
 
 def parse_todo_item_json_body():
     json = request.get_json()
