@@ -6,6 +6,7 @@ app = Flask(__name__)
 # TODO: How to enable this only locally?
 # http://flask.pocoo.org/docs/config/
 app.debug = True
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 enable_mongo = True
 
