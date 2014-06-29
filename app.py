@@ -38,7 +38,7 @@ def todo(list_id, id):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def all(path):
-    return render_template('list.html')
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run()
