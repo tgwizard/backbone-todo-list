@@ -14,6 +14,8 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
       this.subviews = [];
 
       this.input = this.$("#add-new-todo input[name=title]");
+      this.input.focus(); // Would like to use autofocus, but it seems to only work on page reload
+
       this.footer = this.$('#todo-footer');
 
       this.listenTo(this.collection, 'add', this.addOne);
