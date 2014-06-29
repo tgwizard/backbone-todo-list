@@ -1,9 +1,8 @@
 define(['backbone', 'TodoItem'], function(Backbone, TodoItem) {
-  var TodoList = Backbone.Collection.extend({
+  return Backbone.Collection.extend({
     model: TodoItem,
 
     initialize: function(models, options) {
-      console.log(models, options);
       this.id = options.id;
     },
 
@@ -15,15 +14,10 @@ define(['backbone', 'TodoItem'], function(Backbone, TodoItem) {
       return this.where({done: false});
     },
 
-    nextOrder: function() {
-      if (!this.length) return 1;
-      return this.last().get('order') + 1;
-    },
-
     markAllAsDone: function() {
       this.each(function(item) {
-      if (item.get('done')) return;
-      item.toggleDone();
+        if (item.get('done')) return;
+        item.toggleDone();
       });
     }
   });

@@ -6,6 +6,7 @@ define(['backbone', 'underscore'], function(Backbone, _) {
 
       events: {
         'ifToggled input': 'toggleDone',
+        'drop': 'drop',
       },
 
       initialize: function() {
@@ -22,8 +23,12 @@ define(['backbone', 'underscore'], function(Backbone, _) {
         return this;
       },
 
-      toggleDone: function(e, x) {
+      toggleDone: function(e) {
         this.model.toggleDone();
+      },
+
+      drop: function(e, i) {
+        this.model.setPosition(i);
       }
     });
 

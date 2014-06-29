@@ -19,11 +19,21 @@ class TodoListRepo(object):
         return new_item
 
     def update_list_item(self, list_id, updated_item):
-        if list_id not in self.lists:
-            raise KeyError()
-        matched_items = filter(lambda t: t['id'] == updated_item['id'], self.lists[list_id])
-        if len(matched_items) != 1:
-            raise KeyError('Could not find item {} in list {}'.format(updated_item['id'], list_id))
-        current_item = matched_items[0]
+        current_item = self._get_list_item(list_id, updated_item['id'])
         current_item['done'] = updated_item['done']
         return current_item
+
+    def update_list_item_position(self, list_id, item_id, pos):
+        item = self._get_list_item(list_id, item_id)
+        list = self.lists[list_id]
+        list = filter(lambda t: t['id'] != item_id, self.lists[list_id])
+        list.insert(pos, item)
+        self.lists[list_id] = list
+
+    def _get_list_item(self, list_id, item_id):
+        if list_id not in self.lists:
+            raise KeyError('Could not find list {}'.format(list_id))
+        matched_items = filter(lambda t: t['id'] == item_id, self.lists[list_id])
+        if len(matched_items) != 1:
+            raise KeyError('Could not find item {} in list {}'.format(item_id, list_id))
+        return matched_items[0]

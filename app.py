@@ -30,7 +30,11 @@ def todos(list_id):
 
 @app.route('/api/lists/<list_id>/items/<id>', methods=['PUT'])
 def todo(list_id, id):
-    if request.method == 'PUT':
+    if 'position' in request.args:
+        pos = int(request.args['position'])
+        todo_list_repo.update_list_item_position(list_id, id, pos)
+        return Response(status=204)
+    else:
         item = todo_list_repo.update_list_item(list_id, parse_todo_item_json_body())
         return jsonify(item), 200
 

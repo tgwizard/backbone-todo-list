@@ -27,7 +27,7 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
 
     destroy: function() {
       _.each(this.subviews, function(view) {
-      view.destroy();
+        view.destroy();
       });
       this.remove();
     },
@@ -35,6 +35,26 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
     render: function() {
       var remaining = this.collection.remaining().length;
       this.footer.html(this.statusTemplate({remaining: remaining}));
+
+      this.$el.find("#todo-list-body").sortable({
+        helper: function(e, tr) {
+          // http://stackoverflow.com/questions/1307705/jquery-ui-sortable-with-table-and-tr-width/1372954#1372954
+          var $originals = tr.children();
+          var $helper = tr.clone();
+          $helper.addClass('drag-helper');
+          $helper.children().each(function(index)
+          {
+            // Set helper cell sizes to match the original sizes
+            $(this).width($originals.eq(index).width());
+          });
+          return $helper;
+        },
+        stop: function(event, ui) {
+          ui.item.removeClass('drag-helper');
+          ui.item.trigger('drop', ui.item.index());
+        },
+      }).disableSelection();
+
       return this;
     },
 
