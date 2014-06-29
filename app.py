@@ -48,6 +48,10 @@ def todo(list_id, id):
         item = todo_list_repo.update_list_item(list_id, parse_todo_item_json_body())
         return jsonify(item), 200
 
+@app.route('/lists/<list_id>')
+def render_with_todolist(list_id):
+    return render_template('index.html', prerendered_list=json.dumps(todo_list_repo.get_list(list_id)))
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def all(path):

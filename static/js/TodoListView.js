@@ -23,6 +23,7 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
       this.listenTo(this.collection, 'reset', this.addAll);
       this.listenTo(this.collection, 'all', this.render);
 
+      this.addAll();
       return this;
     },
 

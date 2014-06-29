@@ -25,8 +25,17 @@ define(['backbone', 'SelectListView', 'TodoList', 'TodoListView', 'NotFoundView'
     },
 
     list: function(id) {
-      var todoList = new TodoList([], { id: id });
-      todoList.fetch();
+      var todoList;
+      var elem = Backbone.$('#prerendered-list');
+      if (elem.length) {
+        var list = JSON.parse(elem.text());
+        elem.remove();
+        var todoList = new TodoList(list, { id: id });
+      } else {
+        var todoList = new TodoList([], { id: id });
+        todoList.fetch();
+      }
+
       this.loadView(new TodoListView({collection: todoList}));
     },
 
