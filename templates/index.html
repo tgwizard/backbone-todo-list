@@ -19,6 +19,18 @@
     .drag-helper, .drag-helper * {
       background-color: #f9fafb !important;
     }
+    .drag-handle {
+      display: block;
+      visibility: hidden;
+      vertical-align: middle;
+      padding: 10px 5px 10px 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    tr:hover .drag-handle {
+      cursor: pointer;
+      visibility: visible;
+    }
   </style>
 
   <script data-main="/static/js/app" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
@@ -86,6 +98,7 @@
 
   <script type="text/template" id="item-template">
     <td>
+      <span class="drag-handle pull-right">&#8597;</span>
       <div class="checkbox">
         <!-- TODO: Putting the input inside the label makes clicking the label work
               but it makes the vertical alignment align above the middle -->

@@ -49,11 +49,13 @@ define(['jquery', 'backbone', 'underscore', 'TodoList', 'TodoItemView'], functio
           });
           return $helper;
         },
+        handle: '.drag-handle',
+        cursor: 'pointer',
         stop: function(event, ui) {
           ui.item.removeClass('drag-helper');
           ui.item.trigger('drop', ui.item.index());
         },
-      }).disableSelection();
+      });
 
       return this;
     },
