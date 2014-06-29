@@ -9,7 +9,6 @@ define(['backbone', 'underscore'], function(Backbone, _) {
     initialize: function(options) {
       Backbone.$("#main").html(this.el);
       this.input = this.$("#select-todo-list input[name=list-id]");
-      this.input.focus(); // Would like to use autofocus, but it seems to only work on page reload
       return this;
     },
 
