@@ -13,6 +13,9 @@
     .icheckbox {
       position: relative;
     }
+    .checkbox .checked {
+      text-decoration:line-through;
+    }
   </style>
 
   <script data-main="/static/js/app" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
@@ -83,7 +86,7 @@
       <div class="checkbox">
         <!-- TODO: Putting the input inside the label makes clicking the label work
               but it makes the vertical alignment align above the middle -->
-        <label><input type="checkbox" <% if (done) print('checked') %>> <%- title %></label>
+        <label <% if (done) print('class="checked"') %>><input type="checkbox" <% if (done) print('checked') %>> <%- title %></label>
       </div>
     </td>
   </script>
