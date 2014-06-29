@@ -4,7 +4,7 @@ define(['backbone', 'SelectListView', 'TodoList', 'TodoListView', 'NotFoundView'
 
     routes: {
       '': 'index',
-      'list/:id': 'list',
+      'lists/:id': 'list',
       '*404': 'notFound'
     },
 
@@ -26,8 +26,8 @@ define(['backbone', 'SelectListView', 'TodoList', 'TodoListView', 'NotFoundView'
       this.loadView(new SelectListView());
     },
 
-    list: function() {
-      var todoList = new TodoList();
+    list: function(id) {
+      var todoList = new TodoList([], { id: id });
       todoList.fetch();
       this.loadView(new TodoListView({collection: todoList}));
     },

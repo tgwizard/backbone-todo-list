@@ -21,7 +21,7 @@ define(['backbone', 'underscore', 'router'], function(Backbone, _, router) {
       var listId = this.input.val();
       listId = listId.replace(/^\s+|\s+$/g, '');
       this.input.val('');
-      router.navigate('list/' + listId, { trigger: true });
+      router.navigate('lists/' + listId, { trigger: true });
     }
   });
 });

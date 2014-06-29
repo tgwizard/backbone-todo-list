@@ -11,8 +11,6 @@ app.debug = True
 
 todo_list_repo = MockTodoListRepo()
 
-mock_list_id = 'a1'
-
 def parse_todo_item_json_body():
     json = request.get_json()
     item = {
@@ -23,19 +21,18 @@ def parse_todo_item_json_body():
     print item
     return item
 
-@app.route('/api/todos/', methods=['GET', 'POST', 'PUT'])
-def todos():
+@app.route('/api/lists/<list_id>/items/', methods=['GET', 'POST'])
+def todos(list_id):
     if request.method == 'GET':
-        return Response(json.dumps(todo_list_repo.get_list(mock_list_id)), mimetype='application/json')
+        return Response(json.dumps(todo_list_repo.get_list(list_id)), mimetype='application/json')
     elif request.method == 'POST':
-        item = todo_list_repo.create_list_item(mock_list_id, parse_todo_item_json_body())
+        item = todo_list_repo.create_list_item(list_id, parse_todo_item_json_body())
         return jsonify(item), 201
 
-
-@app.route('/api/todos/<id>', methods=['PUT'])
-def todo(id):
+@app.route('/api/lists/<list_id>/items/<id>', methods=['PUT'])
+def todo(list_id, id):
     if request.method == 'PUT':
-        item = todo_list_repo.update_list_item(mock_list_id, parse_todo_item_json_body())
+        item = todo_list_repo.update_list_item(list_id, parse_todo_item_json_body())
         return jsonify(item), 200
 
 @app.route('/', defaults={'path': ''})

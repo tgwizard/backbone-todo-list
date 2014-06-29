@@ -1,7 +1,15 @@
 define(['backbone', 'TodoItem'], function(Backbone, TodoItem) {
   var TodoList = Backbone.Collection.extend({
     model: TodoItem,
-    url: '/api/todos/',
+
+    initialize: function(models, options) {
+      console.log(models, options);
+      this.id = options.id;
+    },
+
+    url: function() {
+      return '/api/lists/' + this.id + '/items/'
+    },
 
     remaining: function() {
       return this.where({done: false});
