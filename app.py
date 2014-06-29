@@ -13,8 +13,8 @@ if enable_mongo:
     import os
     from pymongo import MongoClient
     from lib.real import TodoListRepo
-    client = MongoClient(os.environ.get('MONGOHQ_URL', 'mongodb://localhost:27017/'))
-    db = client.todos
+    client = MongoClient(os.environ.get('MONGOHQ_URL', 'mongodb://localhost:27017/todos'))
+    db = client.get_default_database()
     todo_list_repo = TodoListRepo(db)
 else:
     from lib.mock import TodoListRepo
