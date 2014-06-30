@@ -21,6 +21,7 @@ For Mac OS X, Linux should be similar.
 brew install python
 brew install mongodb
 virtualenv venv
+source venv/bin/activate
 pip install -r requirements.txt
 
 # Terminal A
